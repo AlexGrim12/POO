@@ -134,7 +134,7 @@ public class p1e3 {
             default:
                 break;
         }
-
+scanner.close();
         
     }
 }
