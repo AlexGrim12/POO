@@ -3,37 +3,16 @@ import javax.swing.tree.TreeNode;
 import java.util.Scanner;
 
 public class p3e5 {
+    private static DefaultMutableTreeNode uranos;
+    private static DefaultMutableTreeNode zeus;
+    private static Scanner sc;
 
-    // Método para buscar un descendiente en el árbol (insensible a
-    // mayúsculas/minúsculas)
-    public static TreeNode buscarDescendiente(TreeNode root, String nombre) {
-        if (root.toString().equalsIgnoreCase(nombre)) {
-            return root;
-        }
-        for (int i = 0; i < root.getChildCount(); i++) {
-            TreeNode resultado = buscarDescendiente(root.getChildAt(i), nombre);
-            if (resultado != null) {
-                return resultado;
-            }
-        }
-        return null;
-    }
-
-    // Método para imprimir el árbol genealógico
-    public static void printTree(TreeNode root, String indent) {
-        System.out.println(indent + root);
-        for (int i = 0; i < root.getChildCount(); i++) {
-            printTree(root.getChildAt(i), indent + " | ");
-        }
-    }
-
-    public static void main(String[] args) {
-
+    public p3e5() {
         // Crear los nodos para los personajes
-        DefaultMutableTreeNode uranos = new DefaultMutableTreeNode("Uranos");
+        uranos = new DefaultMutableTreeNode("Uranos");
         DefaultMutableTreeNode cronos = new DefaultMutableTreeNode("Cronos");
 
-        DefaultMutableTreeNode zeus = new DefaultMutableTreeNode("Zeus");
+        zeus = new DefaultMutableTreeNode("Zeus");
         DefaultMutableTreeNode ades = new DefaultMutableTreeNode("Ades");
         DefaultMutableTreeNode hestia = new DefaultMutableTreeNode("Hestia");
         DefaultMutableTreeNode demeter = new DefaultMutableTreeNode("Deméter");
@@ -69,12 +48,31 @@ public class p3e5 {
         zeus.add(apolo);
         zeus.add(afrodita);
 
-        // Imprimir el árbol genealógico
-        System.out.println("Arbol Genealógico Griego:");
-        printTree(uranos, "");
+        sc = new Scanner(System.in);
+    }
 
+    public TreeNode buscarDescendiente(TreeNode root, String nombre) {
+        if (root.toString().equalsIgnoreCase(nombre)) {
+            return root;
+        }
+        for (int i = 0; i < root.getChildCount(); i++) {
+            TreeNode resultado = buscarDescendiente(root.getChildAt(i), nombre);
+            if (resultado != null) {
+                return resultado;
+            }
+        }
+        return null;
+    }
+
+    public void printTree(TreeNode root, String indent) {
+        System.out.println(indent + root);
+        for (int i = 0; i < root.getChildCount(); i++) {
+            printTree(root.getChildAt(i), indent + " | ");
+        }
+    }
+
+    public void buscarUnDescendiente() {
         // Buscar un descendiente
-        Scanner sc = new Scanner(System.in);
         System.out.print("\nIngresa el nombre que deseas buscar: ");
         String nombreABuscar = sc.nextLine();
         TreeNode nodoEncontrado = buscarDescendiente(uranos, nombreABuscar);
@@ -96,33 +94,66 @@ public class p3e5 {
         } else {
             System.out.println("Descendiente no encontrado: " + nombreABuscar);
         }
+    }
 
-        // Agregar un descendiente a Zeus
+    public void agregarUnDescendiente() {
         System.out.println("\nAgregar un descendiente a Zeus:");
         System.out.print("Ingresa el nombre del nuevo descendiente: ");
         String descendiente = sc.nextLine();
         DefaultMutableTreeNode nuevoDescendiente = new DefaultMutableTreeNode(descendiente);
         zeus.add(nuevoDescendiente);
+        System.out.println("Descendiente agregado a Zeus: " + descendiente);
+    }
 
-        // Imprimir el árbol genealógico actualizado
-        System.out.println("\nArbol Genealógico Actualizado:");
-        printTree(uranos, "");
-
-        // Eliminar un descendiente de Zeus
+    public void eliminarUnDescendiente() {
         System.out.println("\nEliminar un descendiente de Zeus:");
         System.out.print("Ingresa el nombre del descendiente a eliminar: ");
-        descendiente = sc.nextLine();
+        String descendiente = sc.nextLine();
         DefaultMutableTreeNode nodoAEliminar = (DefaultMutableTreeNode) buscarDescendiente(zeus, descendiente);
         if (nodoAEliminar != null) {
             zeus.remove(nodoAEliminar);
-            System.out.println("Descendiente eliminado: " + nodoAEliminar);
+            System.out.println("Descendiente eliminado de Zeus: " + nodoAEliminar);
         } else {
-            System.out.println("Descendiente no encontrado: " + descendiente);
+            System.out.println("Descendiente no encontrado en Zeus: " + descendiente);
         }
+    }
 
-        // Imprimir el árbol genealógico actualizado
-        System.out.println("\nArbol Genealógico Actualizado:");
-        printTree(uranos, "");
+    public static void main(String[] args) {
+        p3e5 programa = new p3e5();
+
+        // Menu
+        int opcion = 0;
+        do {
+            System.out.println("\nMenu:");
+            System.out.println("1. Imprimir arbol genealogico");
+            System.out.println("2. Buscar un descendiente");
+            System.out.println("3. Agregar un descendiente a Zeus");
+            System.out.println("4. Eliminar un descendiente de Zeus");
+            System.out.println("5. Salir");
+            System.out.print("Ingresa una opcion: ");
+            opcion = Integer.parseInt(sc.nextLine());
+            switch (opcion) {
+                case 1:
+                    System.out.println();
+                    programa.printTree(uranos, "");
+                    break;
+                case 2:
+                    programa.buscarUnDescendiente();
+                    break;
+                case 3:
+                    programa.agregarUnDescendiente();
+                    break;
+                case 4:
+                    programa.eliminarUnDescendiente();
+                    break;
+                case 5:
+                    System.out.println("Adios!");
+                    break;
+                default:
+                    System.out.println("Opcion no valida");
+                    break;
+            }
+        } while (opcion != 5);
 
         sc.close();
     }
