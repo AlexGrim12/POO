@@ -75,12 +75,24 @@ public class p3e5 {
 
         // Buscar un descendiente
         Scanner sc = new Scanner(System.in);
-        System.out.print("\nIngresa el nombre de un descendiente: ");
+        System.out.print("\nIngresa el nombre que deseas buscar: ");
         String nombreABuscar = sc.nextLine();
         TreeNode nodoEncontrado = buscarDescendiente(uranos, nombreABuscar);
         if (nodoEncontrado != null) {
             System.out.println("Descendiente encontrado: " + nodoEncontrado);
-            System.out.println("Padre: " + nodoEncontrado.getParent());
+            if (nodoEncontrado.getParent() != null)
+                System.out.println("\nPadre: " + nodoEncontrado.getParent());
+            else
+                System.out.println("\nPadre: No tiene");
+            // desendientes
+            if (nodoEncontrado.getChildCount() == 0)
+                System.out.println("\nHijos: No tiene");
+            else {
+                System.out.println("\nHijos: ");
+                for (int i = 0; i < nodoEncontrado.getChildCount(); i++) {
+                    System.out.println(" - " + nodoEncontrado.getChildAt(i));
+                }
+            }
         } else {
             System.out.println("Descendiente no encontrado: " + nombreABuscar);
         }
@@ -91,6 +103,22 @@ public class p3e5 {
         String descendiente = sc.nextLine();
         DefaultMutableTreeNode nuevoDescendiente = new DefaultMutableTreeNode(descendiente);
         zeus.add(nuevoDescendiente);
+
+        // Imprimir el árbol genealógico actualizado
+        System.out.println("\nArbol Genealógico Actualizado:");
+        printTree(uranos, "");
+
+        // Eliminar un descendiente de Zeus
+        System.out.println("\nEliminar un descendiente de Zeus:");
+        System.out.print("Ingresa el nombre del descendiente a eliminar: ");
+        descendiente = sc.nextLine();
+        DefaultMutableTreeNode nodoAEliminar = (DefaultMutableTreeNode) buscarDescendiente(zeus, descendiente);
+        if (nodoAEliminar != null) {
+            zeus.remove(nodoAEliminar);
+            System.out.println("Descendiente eliminado: " + nodoAEliminar);
+        } else {
+            System.out.println("Descendiente no encontrado: " + descendiente);
+        }
 
         // Imprimir el árbol genealógico actualizado
         System.out.println("\nArbol Genealógico Actualizado:");
