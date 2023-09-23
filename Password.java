@@ -10,79 +10,79 @@ class PasswordInput {
             System.exit(0);
         }
 
-        String contraseña = new String(console.readPassword("Ingrese su contraseña: "));
+        String password = new String(console.readPassword("Ingresa la password: "));
 
-        return contraseña;
+        return password;
     }
 }
 
 public class Password {
 
-    private String contraseña;
-    private static final String CARACTERES_ESPECIALES = "!@#$%^&*()-_=+[]{};:'\",.<>/?|\n";
-    protected static final int MIN_LONGITUD = 8;
-    protected static final int MAX_LONGITUD = 16;
+    private String password;
+    private static final String SPECIAL_CHARACTERS = "!@#$%^&*()-_=+[]{};:'\",.<>/?|\n";
+    protected static final int MIN_LENGTH = 8;
+    protected static final int MAX_LENGTH = 16;
 
-    public Password(String contraseña) {
-        this.contraseña = contraseña;
+    public Password(String password) {
+        this.password = password;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public static String validar(String contraseña) {
-        int longitud = contraseña.length();
-        boolean tieneCaracterEspecial = false;
-        boolean tieneNumero = false;
-        boolean tieneMayuscula = false;
-        boolean tieneMinuscula = false;
+    public static String validate(String password) {
+        int length = password.length();
+        boolean hasSpecialCharacter = false;
+        boolean hasNumber = false;
+        boolean hasUppercase = false;
+        boolean hasLowercase = false;
 
-        for (int i = 0; i < longitud; i++) {
-            char c = contraseña.charAt(i);
+        for (int i = 0; i < length; i++) {
+            char c = password.charAt(i);
 
-            if (!tieneCaracterEspecial && CARACTERES_ESPECIALES.indexOf(c) != -1) {
-                tieneCaracterEspecial = true;
+            if (!hasSpecialCharacter && SPECIAL_CHARACTERS.indexOf(c) != -1) {
+                hasSpecialCharacter = true;
             }
-            if (!tieneNumero && Character.isDigit(c)) {
-                tieneNumero = true;
+            if (!hasNumber && Character.isDigit(c)) {
+                hasNumber = true;
             }
-            if (!tieneMayuscula && Character.isUpperCase(c)) {
-                tieneMayuscula = true;
+            if (!hasUppercase && Character.isUpperCase(c)) {
+                hasUppercase = true;
             }
-            if (!tieneMinuscula && Character.isLowerCase(c)) {
-                tieneMinuscula = true;
+            if (!hasLowercase && Character.isLowerCase(c)) {
+                hasLowercase = true;
             }
         }
 
-        if (longitud <= MAX_LONGITUD && longitud > MIN_LONGITUD && tieneCaracterEspecial && tieneNumero
-                && tieneMayuscula && tieneMinuscula) {
+        if (length <= MAX_LENGTH && length > MIN_LENGTH && hasSpecialCharacter && hasNumber
+                && hasUppercase && hasLowercase) {
             return "Fuerte";
-        } else if (longitud >= 8
-                && ((tieneMayuscula && tieneMinuscula) || (tieneMayuscula || tieneMinuscula) && tieneNumero)
-                && tieneCaracterEspecial) {
+        } else if (length >= 8
+                && ((hasUppercase && hasLowercase) || (hasUppercase || hasLowercase) && hasNumber)
+                && hasSpecialCharacter) {
             return "Media";
         } else {
-            return "Débil";
+            return "Debil";
         }
 
     }
 
-    public static String ocultarContraseña(String contraseña) {
-        return "*".repeat(contraseña.length());
+    public static String hidePassword(String password) {
+        return "*".repeat(password.length());
     }
 
     public static void main(String[] args) throws IOException {
 
-        String constraseña = PasswordInput.main(args);
+        String password = PasswordInput.main(args);
 
-        Password password = new Password(constraseña);
-        System.out.println("Contraseña oculta: " + ocultarContraseña(password.getContraseña()));
-        System.out.println("Seguridad de la contraseña: " + validar(password.getContraseña()));
+        Password pwd = new Password(password);
+        System.out.println("Password oculta: " + hidePassword(pwd.getPassword()));
+        System.out.println("La Password es de nivel: " + validate(pwd.getPassword()));
 
     }
 }
