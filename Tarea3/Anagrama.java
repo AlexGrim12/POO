@@ -29,9 +29,9 @@ public class Anagrama {
             String palabra2 = sc.nextLine();
 
             if (esAnagrama(palabra1, palabra2)) {
-                System.out.println("Son anagramas");
+                System.out.println("Las palabras ingresadas son anagramas");
             } else {
-                System.out.println("No son anagramas");
+                System.out.println("Las palabras ingresadas NO son anagramas");
             }
             System.out.println("Desea ingresar otra palabra? (s/n)");
             String res = sc.nextLine();

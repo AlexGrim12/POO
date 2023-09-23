@@ -18,7 +18,7 @@ public class Palindromo {
                     break;
                 }
             }
-            System.out.println((ans) ? true : false);
+            System.out.println((ans) ? "La palabra ingresada es un palindromo" : "La palabra ingresada no es un palindromo");
             System.out.println("Desea ingresar otra palabra? (s/n)");
             String res = sc.nextLine();
             if (res.equals("n")) {
