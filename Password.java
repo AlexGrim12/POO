@@ -3,7 +3,7 @@ import java.io.IOException;
 
 class PasswordInput {
 
-    public static String main(String[] args) throws IOException {
+    public static String main(String[] args) {
         Console console = System.console();
         if (console == null) {
             System.out.println("No se puede obtener la consola");
