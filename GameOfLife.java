@@ -1,4 +1,6 @@
 
+// **Bloque 1: Importación de Librerías**
+
 // importamos librerias
 import java.awt.*;
 import java.awt.event.*;
@@ -13,6 +15,8 @@ import java.io.File;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+
+// **Bloque 2: Declaración de la clase principal GameOfLife**
 
 // Declaración de la clase principal, que extiende JFrame y
 // implementa ActionListener para manejar eventos.
@@ -56,6 +60,8 @@ public class GameOfLife extends JFrame implements ActionListener {
     game.setVisible(true);
 
   }
+
+  // **Bloque 3: Constructor de la Clase GameOfLife y Configuración de Menús**
 
   // Constructor de la clase GameOfLife
   public GameOfLife() {
@@ -115,6 +121,9 @@ public class GameOfLife extends JFrame implements ActionListener {
 
   }
 
+// **Bloque 4: Métodos para el control del juego y eventos**
+
+//  Método para controlar si el juego se está ejecutando o deteniendo
   public void setGameBeingPlayed(boolean isBeingPlayed) {
     if (isBeingPlayed) {
       mi_game_play.setEnabled(false);
@@ -211,6 +220,8 @@ public class GameOfLife extends JFrame implements ActionListener {
       }
     }
   }
+
+  // **Bloque 5: Clase Interna GameBoard - Representación del Tablero de Juego**
 
   // Clase interna GameBoard: representa el tablero de juego y contiene la lógica y el comportamiento del juego
   private class GameBoard extends JPanel implements ComponentListener, MouseListener, MouseMotionListener, Runnable {
@@ -352,6 +363,8 @@ public class GameOfLife extends JFrame implements ActionListener {
     public void mouseMoved(MouseEvent e) {
     }
 
+    // **Bloque 6: Lógica del Juego en la Clase GameBoard**
+    
     // Método run que ejecuta la lógica de la simulación del juego
     @Override
     public void run() {
