@@ -1,5 +1,5 @@
 package practica7;
 
-public class Avion {
+public class Avion extends Vehiculo{
     
 }
