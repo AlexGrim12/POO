@@ -4,19 +4,19 @@ import java.util.Hashtable;
 
 public class Fabrica {
     public static void main(String[] args) {
-        // Crear un objeto de cada tipo de vehículo
+        // Crear un objeto de cada tipo de vehiculo
         Avion avion = new Avion();
         Barco barco = new Barco();
         AvionSupersonico avionSupersonico = new AvionSupersonico();
         Automovil automovil = new Automovil();
 
-        // Crear un arreglo de vehículos
-        Vehiculo[] vehículos = { avion, barco, avionSupersonico, automovil };
+        // Crear un arreglo de vehiculos
+        Vehiculo[] vehiculos = { avion, barco, avionSupersonico, automovil };
 
-        // Crear un hash table de vehículos
+        // Crear un hash table de vehiculos
         Hashtable<String, Vehiculo> vehículosHash = new Hashtable<>();
 
-        // Agregar los vehículos al hash table
+        // Agregar los vehiculos al hash table
         vehículosHash.put(avion.getNumSerie(), avion);
         vehículosHash.put(barco.getNumSerie(), barco);
         vehículosHash.put(avionSupersonico.getNumSerie(), avionSupersonico);
@@ -35,11 +35,11 @@ public class Fabrica {
             System.out.println("0.............20 meta");
             System.out.println("-------------------------");
             boolean todosLlegaron = true;
-            for (int i = 0; i < vehículos.length; i++) {
-                Vehiculo vehículo = vehículos[i];
+            for (int i = 0; i < vehiculos.length; i++) {
+                Vehiculo vehiculo = vehiculos[i];
 
-                int aceleraciónAleatoria = vehículo.getAceleracionDesaceleracion(); // Número aleatorio entre -5 y 5
-                int nuevaVelocidad = vehículo.getVelocidadInicial() + aceleraciónAleatoria;
+                int aceleracionAleatoria = vehiculo.getAceleracionDesaceleracion(); // Número aleatorio entre -5 y 5
+                int nuevaVelocidad = vehiculo.getVelocidadInicial() + aceleracionAleatoria;
 
                 // Verificar que la velocidad no sea negativa
                 if (nuevaVelocidad < 0) {
@@ -57,8 +57,8 @@ public class Fabrica {
                 char etiqueta = (char) ('a' + i);
                 pista.setCharAt(distanciaRecorrida >= 19 ? 19 : distanciaRecorrida, etiqueta);
 
-                // Imprimir el diagrama de la pista y el estado del vehículo
-                String nombreVehículo = vehículo.getClass().getSimpleName();
+                // Imprimir el diagrama de la pista y el estado del vehiculo
+                String nombreVehículo = vehiculo.getClass().getSimpleName();
                 String distanciaRecorridaStr = String.valueOf(distanciaRecorrida);
                 String velocidadStr = String.valueOf(nuevaVelocidad);
                 System.out.printf("%s\n", pista);
@@ -67,14 +67,14 @@ public class Fabrica {
 
                 if (distanciaRecorrida >= longitudPista) {
                     if (tiempo < tiempoGanador) {
-                        ganador = vehículo;
+                        ganador = vehiculo;
                         tiempoGanador = tiempo;
                     }
                 }
             }
 
             if (todosLlegaron) {
-                break; // Todos los vehículos han llegado, sal del bucle
+                break; // Todos los vehiculos han llegado, sal del bucle
             }
 
             tiempo += 1; // Avanzar un minuto en el tiempo
