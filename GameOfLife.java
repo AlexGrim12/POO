@@ -315,6 +315,7 @@ public class GameOfLife extends JFrame implements ActionListener {
 
     }
 
+    // Métodos de la interfaz ComponentListener
     @Override
     public void componentResized(ComponentEvent e) {
       d_gameBoardSize = new Dimension(getWidth() / BLOCK_SIZE - 2, getHeight() / BLOCK_SIZE - 2);
@@ -364,7 +365,7 @@ public class GameOfLife extends JFrame implements ActionListener {
     }
 
     // **Bloque 6: Lógica del Juego en la Clase GameBoard**
-    
+
     // Método run que ejecuta la lógica de la simulación del juego
     @Override
     public void run() {
