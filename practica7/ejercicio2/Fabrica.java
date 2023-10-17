@@ -23,13 +23,13 @@ public class Fabrica {
         vehículosHash.put(automovil.getNumSerie(), automovil);
 
         int longitudPista = 20;
+        Vehiculo ganador = null;
+        int tiempoGanador = Integer.MAX_VALUE;
 
         // Simulación de la carrera
         int tiempo = 0;
 
-        boolean llegaronTodosAMeta = false;
-
-        while (!llegaronTodosAMeta) {
+        while (ganador == null) {
             System.out.printf("MAPA DE LA PISTA");
             System.out.println("Instante de tiempo: " + tiempo + " min");
             System.out.println("0.............20 meta");
@@ -55,7 +55,7 @@ public class Fabrica {
                 // Crear un diagrama de la pista
                 StringBuilder pista = new StringBuilder("...................."); // 20 puntos (sin espacios)
                 char etiqueta = (char) ('a' + i);
-                pista.setCharAt(distanciaRecorrida, etiqueta);
+                pista.setCharAt(distanciaRecorrida >= 19 ? 19 : distanciaRecorrida, etiqueta);
 
                 // Imprimir el diagrama de la pista y el estado del vehículo
                 String nombreVehículo = vehículo.getClass().getSimpleName();
@@ -64,10 +64,17 @@ public class Fabrica {
                 System.out.printf("%s\n", pista);
                 System.out.printf("%c -> Objeto tipo %s: Vi = %s km/h Distancia recorrida Actualmente = %s km\n",
                         etiqueta, nombreVehículo, velocidadStr, distanciaRecorridaStr);
+
+                if (distanciaRecorrida >= longitudPista) {
+                    if (tiempo < tiempoGanador) {
+                        ganador = vehículo;
+                        tiempoGanador = tiempo;
+                    }
+                }
             }
 
             if (todosLlegaron) {
-                llegaronTodosAMeta = true;
+                break; // Todos los vehículos han llegado, sal del bucle
             }
 
             tiempo += 1; // Avanzar un minuto en el tiempo
@@ -81,5 +88,9 @@ public class Fabrica {
         }
 
         System.out.println("-------------------------");
+        if (ganador != null) {
+            System.out.println("El ganador es: " + ganador.getClass().getSimpleName());
+            System.out.println("Tiempo del ganador: " + tiempoGanador + " min");
+        }
     }
 }
