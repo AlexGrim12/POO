@@ -10,8 +10,6 @@ public class Operaciones {
 
         Cliente cliente = new Cliente(tarjetaDebito);
 
-        ATM atm = new ATM();
-
         try {
             // Cliente ingresa NIP
             System.out.print("Ingrese su NIP: ");
@@ -38,7 +36,6 @@ public class Operaciones {
                     case 1:
                         System.out.print("Monto a retirar: ");
                         double montoRetiro = scanner.nextDouble();
-                        atm.verificarSaldo(cliente.consultarSaldo() - montoRetiro);
                         cliente.retirar(montoRetiro);
                         break;
                     case 2:
@@ -58,7 +55,7 @@ public class Operaciones {
                 }
             } while (opcion != 4);
 
-        } catch (OperacionNoValidaException | TarjetaNoValidaException e) {
+        } catch (OperacionNoValidaException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Error inesperado: " + e.getMessage());
